@@ -1,0 +1,133 @@
+/* =========================================
+   HABESHA BITES ADMIN DASHBOARD (DARK THEME)
+========================================= */
+
+.dashboard {
+  width: 100%;
+  min-height: 100vh;
+  padding: 10px 0;
+  box-sizing: border-box;
+}
+
+.dashboard-title {
+  margin: 0;
+  font-size: 28px;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.dashboard-subtitle {
+  margin-top: 6px;
+  margin-bottom: 24px;
+  color: #a0a0a0;
+  font-size: 14px;
+}
+
+/* Cards */
+.dashboard-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.stat-card {
+  background: #1a1a1a;
+  border: 1px solid #2a2a2a;
+  border-radius: 16px;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.stat-card:hover {
+  border-color: #3a3a3a;
+  transform: translateY(-2px);
+  background: #222222;
+}
+
+.stat-icon {
+  width: 54px;
+  height: 54px;
+  border-radius: 14px;
+  background: rgba(229, 9, 20, 0.15);
+  color: #e50914;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+  flex-shrink: 0;
+}
+
+.stat-card h2 {
+  margin: 0;
+  font-size: 28px;
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.stat-card p {
+  margin-top: 4px;
+  color: #a0a0a0;
+  font-size: 13px;
+}
+
+/* Action Button */
+.manage-menu-btn {
+  margin: 10px 0 24px;
+  width: 100%;
+  height: 52px;
+  border: none;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #e50914 0%, #b20710 100%);
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 15px rgba(229, 9, 20, 0.3);
+}
+
+.manage-menu-btn:hover {
+  opacity: 0.95;
+  transform: translateY(-2px);
+}
+
+.manage-menu-btn:active {
+  transform: translateY(0);
+}
+
+/* Info Box */
+.dashboard-info {
+  background: #1a1a1a;
+  border: 1px solid #2a2a2a;
+  border-radius: 16px;
+  padding: 20px;
+}
+
+.dashboard-info h3 {
+  margin: 0 0 12px;
+  font-size: 18px;
+  color: #e50914;
+}
+
+.dashboard-info p {
+  margin: 8px 0;
+  color: #a0a0a0;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* Mobile Priority Styles */
+@media (max-width: 650px) {
+  .dashboard-title { font-size: 22px; }
+  .dashboard-subtitle { font-size: 13px; margin-bottom: 18px; }
+  .dashboard-cards { grid-template-columns: 1fr; gap: 12px; }
+  .stat-card { padding: 16px; }
+  .stat-icon { width: 48px; height: 48px; font-size: 22px; }
+  .stat-card h2 { font-size: 24px; }
+  .manage-menu-btn { height: 48px; font-size: 15px; }
+}

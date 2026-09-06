@@ -1,0 +1,41 @@
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border-radius: 16px;
+  font-weight: 600;
+  transition: transform 0.15s, background 0.15s;
+  font-size: 14px;
+}
+.btn--primary {
+  background: var(--green);
+  color: #fff;
+  padding: 14px 22px;
+  box-shadow: 0 6px 16px rgba(11, 107, 58, 0.25);
+}
+.btn--primary:active {
+  transform: scale(0.96);
+}
+.btn--sm {
+  padding: 8px 14px;
+  font-size: 12px;
+}
+.btn--full {
+  width: 100%;
+}
+.btn--danger {
+  background: var(--terracotta);
+  color: #fff;
+  padding: 14px 22px;
+  box-shadow: 0 6px 16px rgba(196, 67, 43, 0.25);
+}
+.btn--danger:active {
+  transform: scale(0.96);
+}
+.btn--ghost {
+  background: #fff;
+  color: var(--ink);
+  padding: 14px 22px;
+  border: 1px solid var(--line);
+}

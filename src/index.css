@@ -1,0 +1,59 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+  background: #E8E4DC;
+}
+
+body {
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  min-height: 100%;
+  display: flex;
+  justify-content: center;
+  background: #E8E4DC;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+  font-family: inherit;
+}
+
+input {
+  font-family: inherit;
+}
+
+
+
+
+
+#root {
+  min-height: 100%;
+  display: flex;
+  justify-content: center;
+  background: #E8E4DC;
+}
+
+/* ── Tablet (768px+) ── */
+@media (min-width: 768px) {
+  #root {
+    align-items: stretch;
+  }
+}
+
+/* ── Desktop (1024px+) ── */
+@media (min-width: 1024px) {
+  #root {
+    background: #E8E4DC;
+  }
+}

@@ -1,0 +1,239 @@
+/* ===========================================
+   HABESHA BITES DISH FORM (DARK THEME)
+=========================================== */
+
+.form-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(6px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  padding: 16px;
+  box-sizing: border-box;
+}
+
+/* MAIN POPUP */
+.dish-form {
+  width: 100%;
+  max-width: 520px;
+  max-height: 90vh;
+  overflow-y: auto;
+  background: #1a1a1a;
+  border: 1px solid #2a2a2a;
+  border-radius: 20px;
+  padding: 24px;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.6);
+  animation: formPopup 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  color: #ffffff;
+  box-sizing: border-box;
+}
+
+@keyframes formPopup {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* TITLE */
+.dish-form h2 {
+  font-size: 22px;
+  font-weight: 700;
+  color: #ffffff;
+  margin-top: 0;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.dish-form h2::before {
+  content: "🍽️";
+  font-size: 24px;
+}
+
+/* LABELS */
+.dish-form label:not(.checkbox):not(.upload-btn) {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: #a0a0a0;
+  margin-bottom: 6px;
+  margin-top: 14px;
+}
+
+/* INPUTS, SELECT, TEXTAREA */
+.dish-form input[type="text"],
+.dish-form input[type="number"],
+.dish-form select,
+.dish-form textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1px solid #333333;
+  background: #121212;
+  color: #ffffff;
+  font-size: 14px;
+  outline: none;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+  font-family: inherit;
+}
+
+.dish-form input:focus,
+.dish-form select:focus,
+.dish-form textarea:focus {
+  border-color: #e50914;
+  box-shadow: 0 0 0 3px rgba(229, 9, 20, 0.2);
+}
+
+.dish-form select option {
+  background: #1a1a1a;
+  color: #ffffff;
+}
+
+.dish-form textarea {
+  height: 100px;
+  resize: vertical;
+}
+
+/* IMAGE UPLOAD CONTAINER */
+.image-upload-box {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 6px;
+}
+
+.image-preview {
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 12px;
+  border: 1px solid #333;
+}
+
+.upload-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: #252525;
+  border: 1px dashed #444;
+  color: #eea0a0;
+  padding: 12px;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.upload-btn:hover {
+  background: #2e2e2e;
+  border-color: #eea0a0;
+}
+
+.upload-btn input[type="file"] {
+  display: none;
+}
+
+/* CHECKBOX */
+.checkbox {
+  display: flex !important;
+  align-items: center;
+  gap: 10px;
+  background: #121212;
+  border: 1px solid #2a2a2a;
+  padding: 12px 14px;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-top: 18px;
+  font-size: 14px;
+  color: #ffffff;
+}
+
+.checkbox input {
+  width: 18px;
+  height: 18px;
+  accent-color: #e50914;
+}
+
+/* BUTTON AREA */
+.form-buttons {
+  display: flex;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.form-buttons button {
+  flex: 1;
+  padding: 12px;
+  border: none;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+/* CANCEL */
+.form-buttons button:first-child {
+  background: #252525;
+  color: #a0a0a0;
+  border: 1px solid #333;
+}
+
+.form-buttons button:first-child:hover {
+  background: #333333;
+  color: #ffffff;
+}
+
+/* SAVE */
+.form-buttons button:last-child {
+  background: linear-gradient(135deg, #e50914 0%, #b20710 100%);
+  color: white;
+  box-shadow: 0 4px 15px rgba(229, 9, 20, 0.3);
+}
+
+.form-buttons button:last-child:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(229, 9, 20, 0.4);
+}
+
+/* SCROLLBAR */
+.dish-form::-webkit-scrollbar {
+  width: 6px;
+}
+
+.dish-form::-webkit-scrollbar-thumb {
+  background: #333333;
+  border-radius: 10px;
+}
+
+/* MOBILE */
+@media (max-width: 600px) {
+  .dish-form {
+    padding: 18px;
+    border-radius: 16px;
+  }
+
+  .dish-form h2 {
+    font-size: 18px;
+  }
+
+  .form-buttons {
+    flex-direction: column;
+  }
+
+  .form-buttons button {
+    height: 44px;
+  }
+}
