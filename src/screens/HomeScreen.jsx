@@ -5,8 +5,7 @@ import LanguageSwitcher from "../components/LanguageSwitcher.jsx"
 import DishCard from '../components/DishCard.jsx'
 import BottomNav from '../components/BottomNav.jsx'
 
-// 1. Import your logo image
-import logoImg from '../assets/a.jpg' // Adjust path if stored elsewhere (e.g. '../assets/a.jpg')
+import logoImg from '../assets/a.jpg'
 
 export default function HomeScreen({
   dishes = [],
@@ -23,15 +22,19 @@ export default function HomeScreen({
   const [activeCategory, setActiveCategory] = useState('All')
   const [searchQuery, setSearchQuery] = useState('')
 
+  // Enhanced Filter Logic
   const filtered = dishes.filter((d) => {
+    // Matches if category is 'All', 'All Dishes', or matches exact name
     const matchesCategory =
-      activeCategory === 'All' || d.category === activeCategory
+      activeCategory === 'All' ||
+      activeCategory === 'All Dishes' ||
+      (d.category && d.category.toLowerCase() === activeCategory.toLowerCase());
 
     const matchesSearch = d.name
       ? d.name.toLowerCase().includes(searchQuery.toLowerCase())
-      : true
+      : true;
 
-    return matchesCategory && matchesSearch
+    return matchesCategory && matchesSearch;
   })
 
   return (
@@ -40,21 +43,20 @@ export default function HomeScreen({
       <div className="home-hero">
         <div className="home-hero__top-bar">
           <div className="home-hero__location">
-            {/* 2. Updated Avatar Image */}
             <div className="home-hero__avatar">
               <img
                 src={logoImg}
-                alt="Daron Hotel Logo"
+                alt="Shanan Hotel Logo"
                 style={{ objectFit: 'cover', borderRadius: '50%' }}
               />
             </div>
             <div className="home-hero__location-text">
-              <span className="home-hero__delivery-label">Daron Hotel</span>
+              <span className="home-hero__delivery-label">Shanan Hotel</span>
               <span className="home-hero__city">
                 <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" style={{ marginRight: 3 }}>
                   <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5-2.5z" />
                 </svg>
-                Dukem
+                Main Branch
               </span>
             </div>
           </div>
@@ -88,7 +90,7 @@ export default function HomeScreen({
         </div>
       </div>
 
-      {/* ── Search bar (overlapping hero) ── */}
+      {/* ── Search bar ── */}
       <div className="search-row">
         <div className="search-bar">
           <svg className="search-bar__icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
@@ -117,9 +119,18 @@ export default function HomeScreen({
         <section className="section">
           <div className="section__header">
             <h2 className="section__title">{t("categories")}</h2>
-            <button className="section__see-all">See all</button>
+            <button className="section__see-all" onClick={() => setActiveCategory('All')}>
+              See all
+            </button>
           </div>
           <div className="chips-scroll">
+            {/* Always include 'All' chip first */}
+            <button
+              className={`chip${activeCategory === 'All' ? ' chip--active' : ''}`}
+              onClick={() => setActiveCategory('All')}
+            >
+              <span className="chip__label">All</span>
+            </button>
             {categories.map((cat) => (
               <button
                 key={cat._id || cat.id}

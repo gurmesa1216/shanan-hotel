@@ -7,7 +7,6 @@ import LanguageSwitcher from "../components/LanguageSwitcher";
 import DishCard from "../components/DishCard";
 import BottomNav from "../components/BottomNav";
 
-// 1. Import your custom logo image
 import logoImg from "../assets/a.jpg";
 
 export default function MenuScreen({
@@ -25,8 +24,11 @@ export default function MenuScreen({
   const [searchQuery, setSearchQuery] = useState("");
 
   const filtered = dishes.filter((dish) => {
+    // Matches if category is 'All', 'All Dishes', or matches exact category name
     const categoryMatch =
-      activeCategory === "All" || dish.category === activeCategory;
+      activeCategory === "All" ||
+      activeCategory === "All Dishes" ||
+      (dish.category && dish.category.toLowerCase() === activeCategory.toLowerCase());
 
     const searchMatch = dish.name
       ? dish.name.toLowerCase().includes(searchQuery.toLowerCase())
@@ -41,17 +43,17 @@ export default function MenuScreen({
       <div className="home-hero home-hero--menu">
         <div className="home-hero__top-bar">
           <div className="home-hero__location">
-            {/* 2. Updated Avatar Image */}
             <div className="home-hero__avatar">
               <img
                 src={logoImg}
-                alt="Daron Hotel Logo"
+                alt="Shanan Hotel Logo"
+                style={{ objectFit: 'cover', borderRadius: '50%' }}
               />
             </div>
 
             <div className="home-hero__location-text">
               <span className="home-hero__delivery-label">
-                {t("deliveryLocation")}
+                Shanan Hotel
               </span>
 
               <span className="home-hero__city">
@@ -64,7 +66,7 @@ export default function MenuScreen({
                 >
                   <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5-2.5z"/>
                 </svg>
-                Dukem
+                Main Branch
               </span>
             </div>
           </div>
@@ -138,19 +140,27 @@ export default function MenuScreen({
               {t("categories")}
             </h2>
 
-            <button className="section__see-all">
+            <button className="section__see-all" onClick={() => setActiveCategory("All")}>
               {t("seeAll")}
             </button>
           </div>
 
           <div className="chips-scroll">
+            {/* Always include 'All' category chip first */}
+            <button
+              className={`chip ${
+                activeCategory === "All" ? "chip--active" : ""
+              }`}
+              onClick={() => setActiveCategory("All")}
+            >
+              <span className="chip__label">All</span>
+            </button>
+
             {categories.map((cat) => (
               <button
                 key={cat._id || cat.id}
                 className={`chip ${
-                  activeCategory === cat.name
-                    ? "chip--active"
-                    : ""
+                  activeCategory === cat.name ? "chip--active" : ""
                 }`}
                 onClick={() => setActiveCategory(cat.name)}
               >
@@ -176,7 +186,7 @@ export default function MenuScreen({
 
           {filtered.length === 0 ? (
             <div className="empty-state">
-              <span className="empty-state__icon"></span>
+              <span className="empty-state__icon">🍽️</span>
               <p>{t("noDishes")}</p>
             </div>
           ) : (
