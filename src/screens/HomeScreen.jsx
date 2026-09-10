@@ -6,8 +6,9 @@ import DishCard from '../components/DishCard.jsx'
 import BottomNav from '../components/BottomNav.jsx'
 
 import logoImg from '../assets/a.jpg'
-// Import hero background image directly for reliable Vite bundling
+// Import both background images directly for Vite bundling
 import heroBgImg from '../assets/hero-bg.jpg'
+import bodyBgImg from '../assets/body-bg.jpg'
 
 export default function HomeScreen({
   dishes = [],
@@ -38,12 +39,20 @@ export default function HomeScreen({
   })
 
   return (
-    <div className="screen">
-      {/* Dark Hero Header with JSX inline background image */}
+    <div 
+      className="screen"
+      style={{
+        backgroundImage: `linear-gradient(180deg, rgba(248, 249, 250, 0.85) 0%, rgba(248, 249, 250, 0.92) 100%), url(${bodyBgImg})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat'
+      }}
+    >
+      {/* 1. HERO HEADER AREA (Background Image 1) */}
       <div 
         className="home-hero"
         style={{
-          backgroundImage: `linear-gradient(180deg, rgba(18, 18, 18, 0.75) 0%, rgba(18, 18, 18, 0.95) 100%), url(${heroBgImg})`
+          backgroundImage: `linear-gradient(180deg, rgba(18, 18, 18, 0.70) 0%, rgba(18, 18, 18, 0.92) 100%), url(${heroBgImg})`
         }}
       >
         <div className="home-hero__top-bar">
@@ -74,7 +83,7 @@ export default function HomeScreen({
           </div>
         </div>
 
-        {/* Glassmorphic Promo Card */}
+        {/* Promo Banner Card */}
         <div className="home-promo">
           <div className="home-promo__text">
             <span className="home-promo__badge">{t("limitedOffer")}</span>
@@ -91,7 +100,7 @@ export default function HomeScreen({
         </div>
       </div>
 
-      {/* Floating Search Bar */}
+      {/* Search & Filter Floating Bar */}
       <div className="search-row">
         <div className="search-bar">
           <svg className="search-bar__icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
@@ -115,6 +124,7 @@ export default function HomeScreen({
         </button>
       </div>
 
+      {/* 2. BODY SCROLL AREA (Displays Background Image 2 behind Categories & Dishes) */}
       <div className="screen__scroll">
         {/* Categories Section */}
         <section className="section">
