@@ -31,12 +31,9 @@
 
 /* ── Modern Dark Hero Header ── */
 .home-hero {
-  background: linear-gradient(
-      180deg,
-      rgba(18, 18, 18, 0.75) 0%,
-      rgba(18, 18, 18, 0.95) 100%
-    ),
-    url('../assets/hero-bg.jpg') center/cover no-repeat;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
   border-radius: 0 0 32px 32px;
   padding: 20px 18px 24px;
   position: relative;

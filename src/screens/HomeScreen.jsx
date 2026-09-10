@@ -6,6 +6,8 @@ import DishCard from '../components/DishCard.jsx'
 import BottomNav from '../components/BottomNav.jsx'
 
 import logoImg from '../assets/a.jpg'
+// Import hero background image directly for reliable Vite bundling
+import heroBgImg from '../assets/hero-bg.jpg'
 
 export default function HomeScreen({
   dishes = [],
@@ -37,8 +39,13 @@ export default function HomeScreen({
 
   return (
     <div className="screen">
-      {/* Dark Hero Header */}
-      <div className="home-hero">
+      {/* Dark Hero Header with JSX inline background image */}
+      <div 
+        className="home-hero"
+        style={{
+          backgroundImage: `linear-gradient(180deg, rgba(18, 18, 18, 0.75) 0%, rgba(18, 18, 18, 0.95) 100%), url(${heroBgImg})`
+        }}
+      >
         <div className="home-hero__top-bar">
           <div className="home-hero__location">
             <div className="home-hero__avatar">
