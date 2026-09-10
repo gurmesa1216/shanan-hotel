@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 500" width="100%" height="100%">
+  <!-- Optional dark background for previewing white logo; remove rect if transparent background is needed -->
+  <rect width="100%" height="100%" fill="#1b381e"/>
+
+  <g fill="#ffffff">
+    <!-- Emblem Mark -->
+    <!-- S-Curves -->
+    <path d="M 235 90 C 170 85 130 135 145 185 C 155 220 185 245 225 260 C 205 250 160 225 155 185 C 150 145 180 100 235 90 Z" opacity="0.9"/>
+    <path d="M 215 70 C 145 75 125 135 135 180 C 130 140 150 90 215 70 Z" opacity="0.6"/>
+    
+    <path d="M 165 300 C 230 305 270 255 255 205 C 245 170 215 145 175 130 C 195 140 240 165 245 205 C 250 245 220 290 165 300 Z" opacity="0.9"/>
+    <path d="M 185 320 C 255 315 275 255 265 210 C 270 250 250 300 185 320 Z" opacity="0.6"/>
+
+    <!-- Left Tongs / Tool -->
+    <path d="M 185 105 C 195 105 200 115 195 125 L 194 140 C 202 145 200 155 194 165 L 194 280 C 190 285 180 295 180 320 L 187 320 L 187 310 C 187 298 193 290 196 285 L 196 165 C 204 155 202 145 196 140 L 197 125 C 202 115 195 105 185 105 Z"/>
+    <path d="M 190 280 L 190 320 L 183 320 C 183 295 190 285 190 280 Z"/>
+
+    <!-- Right Spear / Lance -->
+    <path d="M 220 95 L 228 135 L 223 135 L 223 285 L 227 285 L 227 290 L 217 290 L 217 285 L 221 285 L 221 135 L 216 135 Z"/>
+    <rect x="215" y="293" width="14" height="3" rx="1"/>
+    <rect x="215" y="298" width="14" height="3" rx="1"/>
+    <rect x="215" y="303" width="14" height="3" rx="1"/>
+    <rect x="215" y="308" width="14" height="3" rx="1"/>
+
+    <!-- Brand Typography -->
+    <text x="200" y="395" 
+          font-family="'Oswald', 'Impact', 'Arial Black', sans-serif" 
+          font-size="68" 
+          font-weight="700" 
+          letter-spacing="4" 
+          text-anchor="middle">SHANAN</text>
+
+    <text x="200" y="435" 
+          font-family="'Montserrat', 'Arial', sans-serif" 
+          font-size="18" 
+          font-weight="600" 
+          letter-spacing="5" 
+          text-anchor="middle">HOTEL &amp; RESORT</text>
+  </g>
+</svg>

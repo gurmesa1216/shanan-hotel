@@ -32,7 +32,7 @@ const translations = {
     deliveryLocation: "Delivery location",
 
     // Banner Promo Strings
-    limitedOffer: "Daron Hotel",
+    limitedOffer: "Shanan Hotel",
     firstOrder: "Taste Authentic & Global Flavors",
     useCode: "SPECIAL WELCOME",
 
@@ -105,7 +105,7 @@ const translations = {
     deliveryLocation: "የመላኪያ ቦታ",
 
     // Banner Promo Strings
-    limitedOffer: "ዳሮን ሆቴል",
+    limitedOffer: "ሸነን ሆቴል",
     firstOrder: "እውነተኛ እና ዓለም አቀፍ ጣዕሞችን ይቅመሱ",
     useCode: "ልዩ የእንኳን ደህና መጡ",
 
@@ -178,7 +178,7 @@ const translations = {
     deliveryLocation: "Bakka geessuu",
 
     // Banner Promo Strings
-    limitedOffer: "Hooteela Darooni",
+    limitedOffer: "Hooteela Shanan",
     firstOrder: "Mi'aa Dhugaa fi Addunyaa Dhandhamadhaa",
     useCode: "SIMANNAA ADDAA",
 

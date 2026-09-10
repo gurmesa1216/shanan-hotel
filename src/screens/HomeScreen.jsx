@@ -5,10 +5,11 @@ import LanguageSwitcher from "../components/LanguageSwitcher.jsx"
 import DishCard from '../components/DishCard.jsx'
 import BottomNav from '../components/BottomNav.jsx'
 
-import logoImg from '../assets/a.jpg'
-// Import both background images directly for Vite bundling
+import logoImg from '../assets/logo.svg'
 import heroBgImg from '../assets/hero-bg.jpg'
 import bodyBgImg from '../assets/body-bg.jpg'
+// 1. Import your promo card background image
+import promoBgImg from '../assets/promo-bg.jpg'
 
 export default function HomeScreen({
   dishes = [],
@@ -48,7 +49,7 @@ export default function HomeScreen({
         backgroundRepeat: 'no-repeat'
       }}
     >
-      {/* 1. HERO HEADER AREA (Background Image 1) */}
+      {/* HERO HEADER AREA */}
       <div 
         className="home-hero"
         style={{
@@ -66,7 +67,7 @@ export default function HomeScreen({
                 <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" style={{ marginRight: 4 }}>
                   <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5-2.5z" />
                 </svg>
-                Addis Ababa
+                Bishoftu
               </span>
             </div>
           </div>
@@ -83,8 +84,15 @@ export default function HomeScreen({
           </div>
         </div>
 
-        {/* Promo Banner Card */}
-        <div className="home-promo">
+        {/* 2. Promo Banner Card with Background Image */}
+        <div 
+          className="home-promo"
+          style={{
+            backgroundImage: `linear-gradient(90deg, rgba(18, 18, 18, 0.85) 0%, rgba(18, 18, 18, 0.45) 100%), url(${promoBgImg})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center'
+          }}
+        >
           <div className="home-promo__text">
             <span className="home-promo__badge">{t("limitedOffer")}</span>
             <h2 className="home-promo__title">{t("firstOrder")}</h2>
@@ -124,9 +132,8 @@ export default function HomeScreen({
         </button>
       </div>
 
-      {/* 2. BODY SCROLL AREA (Displays Background Image 2 behind Categories & Dishes) */}
+      {/* BODY SCROLL AREA */}
       <div className="screen__scroll">
-        {/* Categories Section */}
         <section className="section">
           <div className="section__header">
             <h2 className="section__title">{t("categories")}</h2>
@@ -153,7 +160,6 @@ export default function HomeScreen({
           </div>
         </section>
 
-        {/* Popular Dishes Section */}
         <section className="section">
           <div className="section__header">
             <h2 className="section__title">{t("popularDishes")}</h2>
