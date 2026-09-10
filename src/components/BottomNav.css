@@ -8,103 +8,94 @@
   justify-content: center;
   pointer-events: none;
 }
+
 .bottom-nav__inner {
-  width: calc(100% - 32px);
-  max-width: 388px;
-  margin: 0 auto 14px;
-  background: #fff;
-  border-radius: 30px;
-  padding: 10px 8px;
+  width: calc(100% - 24px);
+  max-width: 420px;
+  margin: 0 auto 12px;
+  background: #ffffff;
+  border-radius: 35px;
+  padding: 6px;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
-  box-shadow: 0 8px 28px rgba(28, 27, 24, 0.14);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
   pointer-events: auto;
 }
+
 .bottom-nav__tab {
+  background: transparent;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 10px;
+  border-radius: 25px;
+  color: #727c75;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  flex: 1;
+}
+
+.bottom-nav__tab-content {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 3px;
-  padding: 6px 10px;
-  border-radius: 18px;
-  color: var(--ink-soft);
-  transition: color 0.2s, background 0.2s;
-  flex: 1;
+  gap: 2px;
 }
+
+/* Rounded Pill highlight for Active tab */
 .bottom-nav__tab--active {
-  color: var(--green);
-  background: var(--green-light);
+  color: #0d4027;
+  background: #e2ede5;
 }
+
+.bottom-nav__tab--active svg {
+  color: #0d4027;
+}
+
 .bottom-nav__icon-wrap {
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
 }
+
 .bottom-nav__badge {
   position: absolute;
   top: -6px;
-  right: -8px;
-  background: var(--terracotta);
-  color: #fff;
+  right: -10px;
+  background: #e50914;
+  color: #ffffff;
   font-size: 9px;
   font-weight: 700;
-  min-width: 15px;
-  height: 15px;
+  min-width: 16px;
+  height: 16px;
   border-radius: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 0 4px;
 }
+
 .bottom-nav__label {
   font-size: 10px;
-  font-weight: 500;
+  font-weight: 600;
+  line-height: 1.1;
 }
 
-
-
-
-
-/* ── Tablet (768px+) ── */
-@media (min-width: 768px) {
-  .bottom-nav__inner {
-    max-width: 560px;
-    padding: 12px 12px;
-    border-radius: 34px;
-  }
-  .bottom-nav__tab {
-    padding: 8px 16px;
-  }
-  .bottom-nav__label {
-    font-size: 11px;
-  }
-}
-
-/* ── Desktop (1024px+) ── */
-@media (min-width: 1024px) {
-  .bottom-nav__inner {
-    max-width: 640px;
-    padding: 14px 16px;
-  }
-  .bottom-nav__tab {
-    padding: 10px 20px;
-  }
-}
-
-/* Saved Modal Styles */
+/* Modal Overlay Styles */
 .saved-modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
   display: flex;
   align-items: flex-end;
   z-index: 10000;
-  animation: fadeIn 0.2s ease-out;
 }
 
 .saved-modal-content {
@@ -113,7 +104,7 @@
   background: #ffffff;
   border-radius: 24px 24px 0 0;
   padding: 20px;
-  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.2);
   overflow-y: auto;
 }
 
@@ -128,7 +119,7 @@
 .saved-modal-header h2 {
   margin: 0;
   font-size: 18px;
-  color: #222;
+  color: #121212;
 }
 
 .saved-close-btn {
@@ -187,8 +178,8 @@
 .saved-item-info p {
   margin: 0;
   font-size: 13px;
-  color: #2e7d32;
-  font-weight: 600;
+  color: #0d4027;
+  font-weight: 700;
 }
 
 .saved-remove-btn {

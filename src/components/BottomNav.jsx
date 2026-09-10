@@ -11,7 +11,6 @@ export default function BottomNav({
   const [showSavedModal, setShowSavedModal] = useState(false)
   const [savedDishes, setSavedDishes] = useState([])
 
-  // Load saved items from localStorage when modal opens
   useEffect(() => {
     if (showSavedModal) {
       const stored = JSON.parse(localStorage.getItem('favoriteDishes') || '[]')
@@ -28,28 +27,28 @@ export default function BottomNav({
   const tabs = [
     {
       id: 'home',
-      label: t('home'),
+      label: t('home') || 'Home',
       icon: HomeIcon
     },
     {
       id: 'menu',
-      label: t('menu'),
+      label: t('menu') || 'Menu',
       icon: MenuIcon
     },
     {
       id: 'favorites',
-      label: t('saved'),
+      label: t('saved') || 'Saved',
       icon: HeartIcon
     },
     {
       id: 'cart',
-      label: t('cart'),
+      label: t('cart') || 'My Cart',
       icon: CartIcon,
       badge: cartCount
     },
     {
       id: 'profile',
-      label: t('profile'),
+      label: t('profile') || 'Profile',
       icon: ProfileIcon
     }
   ]
@@ -78,13 +77,15 @@ export default function BottomNav({
                 }`}
                 onClick={() => handleTabClick(tab.id)}
               >
-                <span className="bottom-nav__icon-wrap">
-                  <Icon />
-                  {tab.badge > 0 && (
-                    <span className="bottom-nav__badge">{tab.badge}</span>
-                  )}
-                </span>
-                <span className="bottom-nav__label">{tab.label}</span>
+                <div className="bottom-nav__tab-content">
+                  <span className="bottom-nav__icon-wrap">
+                    <Icon />
+                    {tab.badge > 0 && (
+                      <span className="bottom-nav__badge">{tab.badge}</span>
+                    )}
+                  </span>
+                  <span className="bottom-nav__label">{tab.label}</span>
+                </div>
               </button>
             )
           })}
@@ -137,7 +138,7 @@ export default function BottomNav({
 
 function HomeIcon() {
   return (
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
       <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
     </svg>
   )
@@ -145,32 +146,18 @@ function HomeIcon() {
 
 function MenuIcon() {
   return (
-    <svg
-      width="22"
-      height="22"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-    >
-      <rect x="3" y="3" width="7" height="7" />
-      <rect x="14" y="3" width="7" height="7" />
-      <rect x="3" y="14" width="7" height="7" />
-      <rect x="14" y="14" width="7" height="7" />
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+      <rect x="3" y="3" width="7" height="7" rx="1.5" />
+      <rect x="14" y="3" width="7" height="7" rx="1.5" />
+      <rect x="3" y="14" width="7" height="7" rx="1.5" />
+      <rect x="14" y="14" width="7" height="7" rx="1.5" />
     </svg>
   )
 }
 
 function HeartIcon() {
   return (
-    <svg
-      width="22"
-      height="22"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-    >
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
       <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78L12 21.23l7.78-7.78a5.5 5.5 0 0 0 1.06-8.84z" />
     </svg>
   )
@@ -178,14 +165,7 @@ function HeartIcon() {
 
 function CartIcon() {
   return (
-    <svg
-      width="22"
-      height="22"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-    >
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
       <circle cx="9" cy="21" r="1" />
       <circle cx="20" cy="21" r="1" />
       <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
@@ -195,14 +175,7 @@ function CartIcon() {
 
 function ProfileIcon() {
   return (
-    <svg
-      width="22"
-      height="22"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-    >
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
       <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
       <circle cx="12" cy="7" r="4" />
     </svg>
