@@ -22,9 +22,7 @@ export default function HomeScreen({
   const [activeCategory, setActiveCategory] = useState('All')
   const [searchQuery, setSearchQuery] = useState('')
 
-  // Enhanced Filter Logic
   const filtered = dishes.filter((d) => {
-    // Matches if category is 'All', 'All Dishes', or matches exact name
     const matchesCategory =
       activeCategory === 'All' ||
       activeCategory === 'All Dishes' ||
@@ -39,24 +37,20 @@ export default function HomeScreen({
 
   return (
     <div className="screen">
-      {/* ── Dark header card ── */}
+      {/* Dark Hero Header */}
       <div className="home-hero">
         <div className="home-hero__top-bar">
           <div className="home-hero__location">
             <div className="home-hero__avatar">
-              <img
-                src={logoImg}
-                alt="Shanan Hotel Logo"
-                style={{ objectFit: 'cover', borderRadius: '50%' }}
-              />
+              <img src={logoImg} alt="Shanan Hotel Logo" />
             </div>
             <div className="home-hero__location-text">
-              <span className="home-hero__delivery-label">Shanan Hotel</span>
+              <span className="home-hero__delivery-label">Shanan Hotel & Resort</span>
               <span className="home-hero__city">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" style={{ marginRight: 3 }}>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" style={{ marginRight: 4 }}>
                   <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5-2.5z" />
                 </svg>
-                Main Branch
+                Addis Ababa
               </span>
             </div>
           </div>
@@ -73,7 +67,7 @@ export default function HomeScreen({
           </div>
         </div>
 
-        {/* Promo banner */}
+        {/* Glassmorphic Promo Card */}
         <div className="home-promo">
           <div className="home-promo__text">
             <span className="home-promo__badge">{t("limitedOffer")}</span>
@@ -90,7 +84,7 @@ export default function HomeScreen({
         </div>
       </div>
 
-      {/* ── Search bar ── */}
+      {/* Floating Search Bar */}
       <div className="search-row">
         <div className="search-bar">
           <svg className="search-bar__icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
@@ -115,7 +109,7 @@ export default function HomeScreen({
       </div>
 
       <div className="screen__scroll">
-        {/* ── Categories ── */}
+        {/* Categories Section */}
         <section className="section">
           <div className="section__header">
             <h2 className="section__title">{t("categories")}</h2>
@@ -124,7 +118,6 @@ export default function HomeScreen({
             </button>
           </div>
           <div className="chips-scroll">
-            {/* Always include 'All' chip first */}
             <button
               className={`chip${activeCategory === 'All' ? ' chip--active' : ''}`}
               onClick={() => setActiveCategory('All')}
@@ -143,7 +136,7 @@ export default function HomeScreen({
           </div>
         </section>
 
-        {/* ── Popular Dishes ── */}
+        {/* Popular Dishes Section */}
         <section className="section">
           <div className="section__header">
             <h2 className="section__title">{t("popularDishes")}</h2>
