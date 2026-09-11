@@ -7,7 +7,7 @@ import LanguageSwitcher from "../components/LanguageSwitcher";
 import DishCard from "../components/DishCard";
 import BottomNav from "../components/BottomNav";
 
-import logoImg from "../assets/a.jpg";
+import logoImg from "../assets/logo.svg";
 
 export default function MenuScreen({
   dishes = [],
