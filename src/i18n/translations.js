@@ -70,6 +70,9 @@ const translations = {
     cardPayment: "Credit / Debit Card",
     cardDesc: "Visa, Mastercard, Amex",
     placeOrder: "Place Order",
+    vipFoodMenu: "VIP Food menu",
+    foodMenu: "Food menu",
+    beverage: "Beverage",
   },
 
   // =========================
@@ -143,6 +146,9 @@ const translations = {
     cardPayment: "ካርድ ክፍያ",
     cardDesc: "Visa, Mastercard, Amex",
     placeOrder: "ትዕዛዝ አስገባ",
+    vipFoodMenu: "የቪ.አይ.ፒ ምግቦች",
+    foodMenu: "የምግብ ዝርዝር",
+    beverage: "መጠጦች",
   },
 
   // =========================
@@ -218,6 +224,9 @@ const translations = {
     cardPayment: "Kaardii Kaffaltii",
     cardDesc: "Visa, Mastercard, Amex",
     placeOrder: "Ajaja galchi",
+    vipFoodMenu: "Nyaata VIP",
+    foodMenu: "Tarree Nyaataa",
+    beverage: "Dhugaatii",
   },
 };
 

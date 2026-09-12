@@ -53,9 +53,9 @@ export default function AdminScreen({
       <div className="admin-topbar">
         <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
           <div className="home-hero__avatar">
-            <img src={logo} alt="PAAROOT Logo" />
+            <img src={logo} alt="Shanan Logo" />
           </div>
-          <h1 className="admin-topbar__title">PAAROOT — Admin</h1>
+          <h1 className="admin-topbar__title">Shanan — Admin</h1>
         </div>
         <div className="admin-topbar__actions">
           <button className="admin-topbar__back" onClick={onBack}>
@@ -238,7 +238,8 @@ export default function AdminScreen({
 }
 
 function DishFormModal({ dish, categories = [], onClose, onSave }) {
-  const defaultCategory = categories[0]?.id || categories[0]?.name || 'traditional'
+  // Default to VIP Food menu if categories prop is not populated
+  const defaultCategory = categories[0]?.id || categories[0]?.name || 'VIP Food menu'
 
   const [form, setForm] = useState(
     dish || {
@@ -250,7 +251,7 @@ function DishFormModal({ dish, categories = [], onClose, onSave }) {
       description: '',
       rating: 4.5,
       prepTime: 15,
-      restaurant: 'PAAROOT Kitchen',
+      restaurant: 'Shanan Kitchen',
       gallery: [],
       available: true,
     }
@@ -292,7 +293,6 @@ function DishFormModal({ dish, categories = [], onClose, onSave }) {
 
         <form onSubmit={handleSubmit}>
           <div className="admin-modal__body">
-            {/* Image picker */}
             <div className="admin-field">
               <label className="admin-field__label">Dish Photo</label>
               <div className="admin-image-picker">
@@ -327,7 +327,7 @@ function DishFormModal({ dish, categories = [], onClose, onSave }) {
                   ))}
                 </div>
               )}
-              <p className="admin-field__hint">Paste a photo URL (e.g. from Pexels). Click a gallery image to set it as the main photo.</p>
+              <p className="admin-field__hint">Paste a photo URL. Click a gallery image to set it as the main photo.</p>
             </div>
 
             <div className="admin-field">
@@ -341,6 +341,7 @@ function DishFormModal({ dish, categories = [], onClose, onSave }) {
               />
             </div>
 
+            {/* Category selection synced to target categories */}
             <div className="admin-field">
               <label className="admin-field__label">Category</label>
               <select
@@ -360,11 +361,9 @@ function DishFormModal({ dish, categories = [], onClose, onSave }) {
                   })
                 ) : (
                   <>
-                    <option value="traditional">Traditional</option>
-                    <option value="vegan">Vegan (Fasting)</option>
-                    <option value="grilled">Grilled (Tibs)</option>
-                    <option value="drinks">Coffee &amp; Drinks</option>
-                    <option value="desserts">Desserts</option>
+                    <option value="VIP Food menu">VIP Food menu</option>
+                    <option value="Food menu">Food menu</option>
+                    <option value="beverage">Beverage</option>
                   </>
                 )}
               </select>

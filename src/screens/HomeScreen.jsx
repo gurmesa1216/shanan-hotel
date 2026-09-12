@@ -8,7 +8,6 @@ import BottomNav from '../components/BottomNav.jsx'
 import logoImg from '../assets/logo.svg'
 import heroBgImg from '../assets/hero-bg.jpg'
 import bodyBgImg from '../assets/body-bg.jpg'
-// 1. Import your promo card background image
 import promoBgImg from '../assets/promo-bg.jpg'
 
 export default function HomeScreen({
@@ -23,14 +22,20 @@ export default function HomeScreen({
 }) {
   const { t } = useLanguage()
 
-  const [activeCategory, setActiveCategory] = useState('All')
+  // 1. Categories with fixed database IDs and dynamic translation keys
+  const customCategories = [
+    { id: 'VIP Food menu', key: 'vipFoodMenu' },
+    { id: 'Food menu', key: 'foodMenu' },
+    { id: 'beverage', key: 'beverage' }
+  ]
+
+  // Default selection set to 'VIP Food menu'
+  const [activeCategory, setActiveCategory] = useState('VIP Food menu')
   const [searchQuery, setSearchQuery] = useState('')
 
   const filtered = dishes.filter((d) => {
     const matchesCategory =
-      activeCategory === 'All' ||
-      activeCategory === 'All Dishes' ||
-      (d.category && d.category.toLowerCase() === activeCategory.toLowerCase());
+      d.category && d.category.toLowerCase() === activeCategory.toLowerCase();
 
     const matchesSearch = d.name
       ? d.name.toLowerCase().includes(searchQuery.toLowerCase())
@@ -84,7 +89,7 @@ export default function HomeScreen({
           </div>
         </div>
 
-        {/* 2. Promo Banner Card with Background Image */}
+        {/* Promo Banner Card */}
         <div 
           className="home-promo"
           style={{
@@ -137,24 +142,16 @@ export default function HomeScreen({
         <section className="section">
           <div className="section__header">
             <h2 className="section__title">{t("categories")}</h2>
-            <button className="section__see-all" onClick={() => setActiveCategory('All')}>
-              See all
-            </button>
           </div>
           <div className="chips-scroll">
-            <button
-              className={`chip${activeCategory === 'All' ? ' chip--active' : ''}`}
-              onClick={() => setActiveCategory('All')}
-            >
-              <span className="chip__label">All</span>
-            </button>
-            {categories.map((cat) => (
+            {/* 2. Map through category objects using t(cat.key) for display */}
+            {customCategories.map((cat) => (
               <button
-                key={cat._id || cat.id}
-                className={`chip${activeCategory === cat.name ? ' chip--active' : ''}`}
-                onClick={() => setActiveCategory(cat.name)}
+                key={cat.id}
+                className={`chip${activeCategory === cat.id ? ' chip--active' : ''}`}
+                onClick={() => setActiveCategory(cat.id)}
               >
-                <span className="chip__label">{cat.name}</span>
+                <span className="chip__label">{t(cat.key)}</span>
               </button>
             ))}
           </div>
