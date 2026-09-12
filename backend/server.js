@@ -63,10 +63,13 @@ function mapDish(row, req) {
     }
   }
 
+  // Gracefully handles both string category IDs and foreign key names
+  const categoryDisplayName = row.category_name || row.category_id || 'Food menu';
+
   return {
     id: row.id,
     name: row.name,
-    category: row.category_name || 'Nyaata/ምግብ',
+    category: categoryDisplayName,
     categoryId: row.category_id,
     price: Number(row.price),
     portion: row.portion,
@@ -106,14 +109,14 @@ app.get('/api/health', async (req, res) => {
 
 // ════════ CATEGORIES ════════
 
-app.get('/api/categories', async (req, res) => {
-  try {
-    const [rows] = await pool.query('SELECT * FROM categories ORDER BY id');
-    res.json(rows);
-  } catch (err) {
-    console.error("GET /api/categories error:", err);
-    res.status(500).json({ error: getErrorMessage(err) });
-  }
+app.get('/api/categories', (req, res) => {
+  // Directly returns target category structure to align frontend tabs
+  res.json([
+    { id: 1, name: "All", icon: "🍽️" },
+    { id: 2, name: "VIP Food menu", icon: "👑" },
+    { id: 3, name: "Food menu", icon: "🍲" },
+    { id: 4, name: "beverage", icon: "🥤" }
+  ]);
 });
 
 // ════════ DISHES ════════
@@ -135,8 +138,9 @@ app.get('/api/dishes', async (req, res) => {
       sql += ' AND d.available = TRUE';
     }
     if (category && category !== 'all') {
-      sql += ' AND c.name = ?';
-      params.push(category);
+      // Supports querying by both FK joined category name and direct category_id string
+      sql += ' AND (c.name = ? OR d.category_id = ?)';
+      params.push(category, category);
     }
     sql += ' ORDER BY d.id';
 
