@@ -7,8 +7,6 @@ export default function DishForm({
   onClose,
   onSaved
 }) {
-  const [categories, setCategories] = useState([]);
-
   const [form, setForm] = useState({
     name: "",
     category_id: "",
@@ -25,12 +23,10 @@ export default function DishForm({
   const [preview, setPreview] = useState("");
 
   useEffect(() => {
-    loadCategories();
-
     if (dish) {
       setForm({
         name: dish.name || "",
-        category_id: dish.categoryId || "",
+        category_id: dish.categoryId || dish.category_id || "",
         description: dish.description || "",
         price: dish.price || "",
         portion: dish.portion || "",
@@ -43,13 +39,6 @@ export default function DishForm({
     }
   }, [dish]);
 
-  const loadCategories = async () => {
-    const data = await api.getCategories();
-    if (data) {
-      setCategories(data);
-    }
-  };
-
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     setForm((prev) => ({
@@ -58,7 +47,6 @@ export default function DishForm({
     }));
   };
 
-  // RESET ALL FORM STATES AND FILE INPUT
   const resetForm = () => {
     setForm({
       name: "",
@@ -74,7 +62,6 @@ export default function DishForm({
     setImage(null);
     setPreview("");
 
-    // Clear file input DOM element
     const fileInput = document.getElementById("dish-image-file-input");
     if (fileInput) {
       fileInput.value = "";
@@ -106,7 +93,7 @@ export default function DishForm({
     }
 
     if (result) {
-      resetForm(); // Reset everything after success
+      resetForm();
       onSaved();
       onClose();
     }
@@ -131,13 +118,12 @@ export default function DishForm({
             name="category_id"
             value={form.category_id}
             onChange={handleChange}
+            required
           >
             <option value="">Select Category</option>
-            {categories.map((cat) => (
-              <option key={cat.id} value={cat.id}>
-                {cat.name}
-              </option>
-            ))}
+            <option value="VIP Food menu">VIP Food menu</option>
+            <option value="Food menu">Food menu</option>
+            <option value="beverage">beverage</option>
           </select>
 
           <label>Image URL</label>
