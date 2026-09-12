@@ -33,9 +33,11 @@ export default function HomeScreen({
   const [activeCategory, setActiveCategory] = useState('VIP Food menu')
   const [searchQuery, setSearchQuery] = useState('')
 
+  // 2. Filter logic: checks both categoryId and category against activeCategory
   const filtered = dishes.filter((d) => {
-    const matchesCategory =
-      d.category && d.category.toLowerCase() === activeCategory.toLowerCase();
+    const matchCatId = d.categoryId && String(d.categoryId).toLowerCase() === activeCategory.toLowerCase();
+    const matchCatName = d.category && String(d.category).toLowerCase() === activeCategory.toLowerCase();
+    const matchesCategory = matchCatId || matchCatName;
 
     const matchesSearch = d.name
       ? d.name.toLowerCase().includes(searchQuery.toLowerCase())
@@ -144,7 +146,6 @@ export default function HomeScreen({
             <h2 className="section__title">{t("categories")}</h2>
           </div>
           <div className="chips-scroll">
-            {/* 2. Map through category objects using t(cat.key) for display */}
             {customCategories.map((cat) => (
               <button
                 key={cat.id}
