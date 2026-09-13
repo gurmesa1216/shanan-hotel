@@ -10,6 +10,19 @@ import heroBgImg from '../assets/hero-bg.jpg'
 import bodyBgImg from '../assets/body-bg.jpg'
 import promoBgImg from '../assets/promo-bg.jpg'
 
+// VIP Crown SVG Component
+const CrownIcon = () => (
+  <svg 
+    width="16" 
+    height="16" 
+    viewBox="0 0 24 24" 
+    fill="currentColor" 
+    style={{ marginRight: 4 }}
+  >
+    <path d="M5 16L3 5l5.5 5L12 4l3.5 6L21 5l-2 11H5zm14 3c0 .6-.4 1-1 1H6c-.6 0-1-.4-1-1v-1h14v1z"/>
+  </svg>
+)
+
 export default function HomeScreen({
   dishes = [],
   categories = [],
@@ -22,9 +35,9 @@ export default function HomeScreen({
 }) {
   const { t } = useLanguage()
 
-  // 1. Categories with fixed database IDs and dynamic translation keys
+  // 1. Categories with fixed database IDs, translation keys, and SVG icons
   const customCategories = [
-    { id: 'VIP Food menu', key: 'vipFoodMenu', icon: '👑' },
+    { id: 'VIP Food menu', key: 'vipFoodMenu', icon: <CrownIcon /> },
     { id: 'Food menu', key: 'foodMenu' },
     { id: 'beverage', key: 'beverage' }
   ]
