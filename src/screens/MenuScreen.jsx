@@ -9,6 +9,19 @@ import BottomNav from "../components/BottomNav";
 
 import logoImg from "../assets/logo.svg";
 
+// VIP Crown SVG Component
+const CrownIcon = () => (
+  <svg 
+    width="16" 
+    height="16" 
+    viewBox="0 0 24 24" 
+    fill="currentColor" 
+    style={{ marginRight: 4 }}
+  >
+    <path d="M5 16L3 5l5.5 5L12 4l3.5 6L21 5l-2 11H5zm14 3c0 .6-.4 1-1 1H6c-.6 0-1-.4-1-1v-1h14v1z"/>
+  </svg>
+)
+
 export default function MenuScreen({
   dishes = [],
   categories = [],
@@ -20,10 +33,10 @@ export default function MenuScreen({
 }) {
   const { t } = useLanguage();
 
-  // 1. Unified category list matching HomeScreen
+  // 1. Unified category list matching HomeScreen with Crown SVG icon for VIP
   const customCategories = [
     { id: 'All', key: 'all', label: 'All' },
-    { id: 'VIP Food menu', key: 'vipFoodMenu', label: 'VIP Food menu' },
+    { id: 'VIP Food menu', key: 'vipFoodMenu', label: 'VIP Food menu', icon: <CrownIcon /> },
     { id: 'Food menu', key: 'foodMenu', label: 'Food menu' },
     { id: 'beverage', key: 'beverage', label: 'Beverage' }
   ];
@@ -155,19 +168,23 @@ export default function MenuScreen({
           </div>
 
           <div className="chips-scroll">
-            {customCategories.map((cat) => (
-              <button
-                key={cat.id}
-                className={`chip ${
-                  activeCategory === cat.id ? "chip--active" : ""
-                }`}
-                onClick={() => setActiveCategory(cat.id)}
-              >
-                <span className="chip__label">
-                  {t(cat.key) || cat.label}
-                </span>
-              </button>
-            ))}
+            {customCategories.map((cat) => {
+              const isVip = cat.id === 'VIP Food menu';
+              const isActive = activeCategory === cat.id;
+
+              return (
+                <button
+                  key={cat.id}
+                  className={`chip${isVip ? ' chip--vip' : ''}${isActive ? ' chip--active' : ''}`}
+                  onClick={() => setActiveCategory(cat.id)}
+                >
+                  {cat.icon && <span className="chip__icon">{cat.icon}</span>}
+                  <span className="chip__label">
+                    {t(cat.key) || cat.label}
+                  </span>
+                </button>
+              );
+            })}
           </div>
         </section>
 
