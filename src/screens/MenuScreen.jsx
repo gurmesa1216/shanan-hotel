@@ -20,18 +20,25 @@ export default function MenuScreen({
 }) {
   const { t } = useLanguage();
 
+  // 1. Unified category list matching HomeScreen
+  const customCategories = [
+    { id: 'All', key: 'all', label: 'All' },
+    { id: 'VIP Food menu', key: 'vipFoodMenu', label: 'VIP Food menu' },
+    { id: 'Food menu', key: 'foodMenu', label: 'Food menu' },
+    { id: 'beverage', key: 'beverage', label: 'Beverage' }
+  ];
+
   const [activeCategory, setActiveCategory] = useState("All");
   const [searchQuery, setSearchQuery] = useState("");
 
   const filtered = dishes.filter((dish) => {
-    // 1. Check matching category against activeCategory
+    // 2. Category matching across categoryId and category properties
     const isAll = activeCategory === "All" || activeCategory === "All Dishes";
     const matchCatId = dish.categoryId && String(dish.categoryId).toLowerCase() === activeCategory.toLowerCase();
     const matchCatName = dish.category && String(dish.category).toLowerCase() === activeCategory.toLowerCase();
 
     const categoryMatch = isAll || matchCatId || matchCatName;
 
-    // 2. Search query matching
     const searchMatch = dish.name
       ? dish.name.toLowerCase().includes(searchQuery.toLowerCase())
       : true;
@@ -148,26 +155,16 @@ export default function MenuScreen({
           </div>
 
           <div className="chips-scroll">
-            {/* Always include 'All' category chip first */}
-            <button
-              className={`chip ${
-                activeCategory === "All" ? "chip--active" : ""
-              }`}
-              onClick={() => setActiveCategory("All")}
-            >
-              <span className="chip__label">All</span>
-            </button>
-
-            {categories.map((cat) => (
+            {customCategories.map((cat) => (
               <button
-                key={cat._id || cat.id}
+                key={cat.id}
                 className={`chip ${
-                  activeCategory === cat.name ? "chip--active" : ""
+                  activeCategory === cat.id ? "chip--active" : ""
                 }`}
-                onClick={() => setActiveCategory(cat.name)}
+                onClick={() => setActiveCategory(cat.id)}
               >
                 <span className="chip__label">
-                  {cat.name}
+                  {t(cat.key) || cat.label}
                 </span>
               </button>
             ))}
