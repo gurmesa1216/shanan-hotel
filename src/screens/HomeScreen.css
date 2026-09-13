@@ -373,3 +373,22 @@
     gap: 22px;
   }
 }
+
+/* ── VIP Category Chip Styles ── */
+.chip--vip {
+  border: 1px solid rgba(242, 183, 5, 0.4);
+  background: rgba(242, 183, 5, 0.08);
+  color: #B8860B;
+}
+
+.chip--vip .chip__icon {
+  font-size: 14px;
+}
+
+.chip--vip.chip--active {
+  background: linear-gradient(135deg, #F2B705 0%, #D49B00 100%);
+  color: #121212;
+  border-color: #F2B705;
+  box-shadow: 0 6px 16px rgba(242, 183, 5, 0.35);
+  font-weight: 700;
+}

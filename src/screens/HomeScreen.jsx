@@ -24,7 +24,7 @@ export default function HomeScreen({
 
   // 1. Categories with fixed database IDs and dynamic translation keys
   const customCategories = [
-    { id: 'VIP Food menu', key: 'vipFoodMenu' },
+    { id: 'VIP Food menu', key: 'vipFoodMenu', icon: '👑' },
     { id: 'Food menu', key: 'foodMenu' },
     { id: 'beverage', key: 'beverage' }
   ]
@@ -146,15 +146,21 @@ export default function HomeScreen({
             <h2 className="section__title">{t("categories")}</h2>
           </div>
           <div className="chips-scroll">
-            {customCategories.map((cat) => (
-              <button
-                key={cat.id}
-                className={`chip${activeCategory === cat.id ? ' chip--active' : ''}`}
-                onClick={() => setActiveCategory(cat.id)}
-              >
-                <span className="chip__label">{t(cat.key)}</span>
-              </button>
-            ))}
+            {customCategories.map((cat) => {
+              const isVip = cat.id === 'VIP Food menu';
+              const isActive = activeCategory === cat.id;
+              
+              return (
+                <button
+                  key={cat.id}
+                  className={`chip${isVip ? ' chip--vip' : ''}${isActive ? ' chip--active' : ''}`}
+                  onClick={() => setActiveCategory(cat.id)}
+                >
+                  {cat.icon && <span className="chip__icon">{cat.icon}</span>}
+                  <span className="chip__label">{t(cat.key)}</span>
+                </button>
+              );
+            })}
           </div>
         </section>
 
