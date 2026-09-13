@@ -24,12 +24,14 @@ export default function MenuScreen({
   const [searchQuery, setSearchQuery] = useState("");
 
   const filtered = dishes.filter((dish) => {
-    // Matches if category is 'All', 'All Dishes', or matches exact category name
-    const categoryMatch =
-      activeCategory === "All" ||
-      activeCategory === "All Dishes" ||
-      (dish.category && dish.category.toLowerCase() === activeCategory.toLowerCase());
+    // 1. Check matching category against activeCategory
+    const isAll = activeCategory === "All" || activeCategory === "All Dishes";
+    const matchCatId = dish.categoryId && String(dish.categoryId).toLowerCase() === activeCategory.toLowerCase();
+    const matchCatName = dish.category && String(dish.category).toLowerCase() === activeCategory.toLowerCase();
 
+    const categoryMatch = isAll || matchCatId || matchCatName;
+
+    // 2. Search query matching
     const searchMatch = dish.name
       ? dish.name.toLowerCase().includes(searchQuery.toLowerCase())
       : true;
