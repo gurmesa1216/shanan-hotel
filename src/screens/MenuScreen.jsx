@@ -7,7 +7,7 @@ import LanguageSwitcher from "../components/LanguageSwitcher";
 import DishCard from "../components/DishCard";
 import BottomNav from "../components/BottomNav";
 
-import logoImg from "../assets/logo.svg";
+import logoImg from "../assets/a.jpg";
 import heroBgImg from "../assets/hero-bg.jpg"; // Imported hero background image
 
 // VIP Crown SVG Component

@@ -5,7 +5,7 @@ import LanguageSwitcher from "../components/LanguageSwitcher.jsx"
 import DishCard from '../components/DishCard.jsx'
 import BottomNav from '../components/BottomNav.jsx'
 
-import logoImg from '../assets/logo.svg'
+import logoImg from '../assets/a.jpg'
 import heroBgImg from '../assets/hero-bg.jpg'
 import bodyBgImg from '../assets/body-bg.jpg'
 import promoBgImg from '../assets/promo-bg.jpg'
