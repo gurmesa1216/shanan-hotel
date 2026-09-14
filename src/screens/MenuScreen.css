@@ -40,6 +40,14 @@
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
 }
 
+.home-hero--menu {
+  min-height: 120px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding-bottom: 34px;
+}
+
 .home-hero__top-bar {
   display: flex;
   align-items: center;

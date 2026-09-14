@@ -8,6 +8,7 @@ import DishCard from "../components/DishCard";
 import BottomNav from "../components/BottomNav";
 
 import logoImg from "../assets/logo.svg";
+import heroBgImg from "../assets/hero-bg.jpg"; // Imported hero background image
 
 // VIP Crown SVG Component
 const CrownIcon = () => (
@@ -33,7 +34,6 @@ export default function MenuScreen({
 }) {
   const { t } = useLanguage();
 
-  // 1. Unified category list matching HomeScreen with Crown SVG icon for VIP
   const customCategories = [
     { id: 'All', key: 'all', label: 'All' },
     { id: 'VIP Food menu', key: 'vipFoodMenu', label: 'VIP Food menu', icon: <CrownIcon /> },
@@ -45,7 +45,6 @@ export default function MenuScreen({
   const [searchQuery, setSearchQuery] = useState("");
 
   const filtered = dishes.filter((dish) => {
-    // 2. Category matching across categoryId and category properties
     const isAll = activeCategory === "All" || activeCategory === "All Dishes";
     const matchCatId = dish.categoryId && String(dish.categoryId).toLowerCase() === activeCategory.toLowerCase();
     const matchCatName = dish.category && String(dish.category).toLowerCase() === activeCategory.toLowerCase();
@@ -61,8 +60,13 @@ export default function MenuScreen({
 
   return (
     <div className="screen">
-      {/* HEADER */}
-      <div className="home-hero home-hero--menu">
+      {/* HEADER WITH BACKGROUND IMAGE */}
+      <div 
+        className="home-hero home-hero--menu"
+        style={{
+          backgroundImage: `linear-gradient(180deg, rgba(18, 18, 18, 0.70) 0%, rgba(18, 18, 18, 0.92) 100%), url(${heroBgImg})`
+        }}
+      >
         <div className="home-hero__top-bar">
           <div className="home-hero__location">
             <div className="home-hero__avatar">
