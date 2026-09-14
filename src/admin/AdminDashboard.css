@@ -70,13 +70,18 @@
   font-size: 14px;
   font-weight: 600;
   cursor: pointer;
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 6px;
+  justify-content: center;
+  gap: 8px;
   backdrop-filter: blur(12px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
   transition: all 0.2s ease;
   white-space: nowrap;
+}
+
+.dashboard-header-btn svg {
+  display: block;
 }
 
 .dashboard-header-btn:hover {
@@ -152,10 +157,14 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 24px;
+  color: var(--dash-gold);
   flex-shrink: 0;
   box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.1);
   transition: transform 0.25s ease;
+}
+
+.stat-icon svg {
+  display: block;
 }
 
 .stat-card:hover .stat-icon {
@@ -198,10 +207,14 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: 10px;
   box-shadow: 0 8px 24px rgba(242, 183, 5, 0.25);
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   -webkit-tap-highlight-color: transparent;
+}
+
+.manage-menu-btn svg {
+  display: block;
 }
 
 .manage-menu-btn:hover {
@@ -249,80 +262,6 @@
   padding: 40px;
   text-align: center;
   color: #ffffff;
-}
-
-/* ── COMPREHENSIVE OVERRIDE FOR TOP-LEFT HAMBURGER MENU ICON ── */
-
-/* Force all top-left navigation buttons to render light and high contrast */
-.admin-layout header button,
-.admin-header button,
-.top-bar button,
-.menu-toggle,
-.top-bar__menu-btn,
-.header-hamburger,
-button[aria-label="Toggle menu"],
-button[aria-label="menu"],
-button[aria-label="Open menu"] {
-  background: rgba(255, 255, 255, 0.12) !important;
-  border: 1px solid rgba(242, 183, 5, 0.4) !important;
-  border-radius: 10px !important;
-  color: #FFFFFF !important;
-  display: inline-flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  padding: 8px 10px !important;
-  cursor: pointer !important;
-  transition: all 0.2s ease !important;
-}
-
-/* Target SVG icons, inner lines, paths, and text characters inside the button */
-.admin-layout header button svg,
-.admin-header button svg,
-.top-bar button svg,
-.menu-toggle svg,
-.top-bar__menu-btn svg,
-.header-hamburger svg,
-button[aria-label="Toggle menu"] svg,
-button[aria-label="menu"] svg,
-button[aria-label="Open menu"] svg {
-  color: #FFFFFF !important;
-  fill: #FFFFFF !important;
-  stroke: #FFFFFF !important;
-}
-
-.admin-layout header button svg *,
-.admin-header button svg *,
-.top-bar button svg *,
-.menu-toggle svg *,
-.top-bar__menu-btn svg *,
-.header-hamburger svg *,
-button[aria-label="Toggle menu"] svg *,
-button[aria-label="menu"] svg *,
-button[aria-label="Open menu"] svg * {
-  fill: #FFFFFF !important;
-  stroke: #FFFFFF !important;
-}
-
-/* Gold hover effect */
-.admin-layout header button:hover,
-.admin-header button:hover,
-.top-bar button:hover,
-.menu-toggle:hover,
-.top-bar__menu-btn:hover,
-.header-hamburger:hover {
-  background: rgba(242, 183, 5, 0.25) !important;
-  border-color: #F2B705 !important;
-  color: #F2B705 !important;
-}
-
-.admin-layout header button:hover svg *,
-.admin-header button:hover svg *,
-.top-bar button:hover svg *,
-.menu-toggle:hover svg *,
-.top-bar__menu-btn:hover svg *,
-.header-hamburger:hover svg * {
-  fill: #F2B705 !important;
-  stroke: #F2B705 !important;
 }
 
 /* Tablet & Desktop Layout Escalation */
