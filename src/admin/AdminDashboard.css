@@ -51,6 +51,46 @@
   letter-spacing: -0.01em;
 }
 
+/* Header Flex Layout */
+.dashboard-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+/* High-Contrast Top Option Button */
+.dashboard-header-btn {
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  border: 1px solid var(--dash-border-gold);
+  border-radius: 12px;
+  padding: 10px 16px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.dashboard-header-btn:hover {
+  background: var(--dash-gold);
+  color: #121212;
+  border-color: var(--dash-gold);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(242, 183, 5, 0.3);
+}
+
+.dashboard-header-btn:active {
+  transform: translateY(0);
+}
+
 /* Stat Cards Layout (Mobile Priority Grid) */
 .dashboard-cards {
   display: grid;
@@ -205,6 +245,86 @@
   line-height: 1.6;
 }
 
+.dashboard-loading {
+  padding: 40px;
+  text-align: center;
+  color: #ffffff;
+}
+
+/* ── COMPREHENSIVE OVERRIDE FOR TOP-LEFT HAMBURGER MENU ICON ── */
+
+/* Force all top-left navigation buttons to render light and high contrast */
+.admin-layout header button,
+.admin-header button,
+.top-bar button,
+.menu-toggle,
+.top-bar__menu-btn,
+.header-hamburger,
+button[aria-label="Toggle menu"],
+button[aria-label="menu"],
+button[aria-label="Open menu"] {
+  background: rgba(255, 255, 255, 0.12) !important;
+  border: 1px solid rgba(242, 183, 5, 0.4) !important;
+  border-radius: 10px !important;
+  color: #FFFFFF !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 8px 10px !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+}
+
+/* Target SVG icons, inner lines, paths, and text characters inside the button */
+.admin-layout header button svg,
+.admin-header button svg,
+.top-bar button svg,
+.menu-toggle svg,
+.top-bar__menu-btn svg,
+.header-hamburger svg,
+button[aria-label="Toggle menu"] svg,
+button[aria-label="menu"] svg,
+button[aria-label="Open menu"] svg {
+  color: #FFFFFF !important;
+  fill: #FFFFFF !important;
+  stroke: #FFFFFF !important;
+}
+
+.admin-layout header button svg *,
+.admin-header button svg *,
+.top-bar button svg *,
+.menu-toggle svg *,
+.top-bar__menu-btn svg *,
+.header-hamburger svg *,
+button[aria-label="Toggle menu"] svg *,
+button[aria-label="menu"] svg *,
+button[aria-label="Open menu"] svg * {
+  fill: #FFFFFF !important;
+  stroke: #FFFFFF !important;
+}
+
+/* Gold hover effect */
+.admin-layout header button:hover,
+.admin-header button:hover,
+.top-bar button:hover,
+.menu-toggle:hover,
+.top-bar__menu-btn:hover,
+.header-hamburger:hover {
+  background: rgba(242, 183, 5, 0.25) !important;
+  border-color: #F2B705 !important;
+  color: #F2B705 !important;
+}
+
+.admin-layout header button:hover svg *,
+.admin-header button:hover svg *,
+.top-bar button:hover svg *,
+.menu-toggle:hover svg *,
+.top-bar__menu-btn:hover svg *,
+.header-hamburger:hover svg * {
+  fill: #F2B705 !important;
+  stroke: #F2B705 !important;
+}
+
 /* Tablet & Desktop Layout Escalation */
 @media (min-width: 650px) {
   .dashboard {
@@ -232,86 +352,4 @@
     height: 56px;
     font-size: 17px;
   }
-}
-
-/* Header Flex Layout */
-.dashboard-header {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 12px;
-  margin-bottom: 16px;
-}
-
-/* High-Contrast Top Option Button */
-.dashboard-header-btn {
-  background: rgba(255, 255, 255, 0.12);
-  color: #ffffff;
-  border: 1px solid var(--dash-border-gold);
-  border-radius: 12px;
-  padding: 10px 16px;
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  backdrop-filter: blur(12px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
-  transition: all 0.2s ease;
-  white-space: nowrap;
-}
-
-.dashboard-header-btn:hover {
-  background: var(--dash-gold);
-  color: #121212;
-  border-color: var(--dash-gold);
-  transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(242, 183, 5, 0.3);
-}
-
-.dashboard-header-btn:active {
-  transform: translateY(0);
-}
-
-.dashboard-loading {
-  padding: 40px;
-  text-align: center;
-  color: #ffffff;
-}
-
-/* ── Top Header Menu Toggle Icon Override ── */
-.menu-toggle,
-.top-bar__menu-btn,
-button[aria-label="Toggle menu"],
-.header-hamburger {
-  background: rgba(255, 255, 255, 0.08) !important;
-  border: 1px solid rgba(255, 255, 255, 0.15) !important;
-  border-radius: 10px !important;
-  color: #FFFFFF !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  padding: 8px !important;
-  cursor: pointer !important;
-  transition: all 0.2s ease !important;
-}
-
-/* Brighten inner lines/SVG if applicable */
-.menu-toggle stroke,
-.top-bar__menu-btn stroke,
-.header-hamburger stroke,
-.menu-toggle svg,
-.top-bar__menu-btn svg {
-  stroke: #FFFFFF !important;
-  color: #FFFFFF !important;
-}
-
-/* Gold Accent Hover State */
-.menu-toggle:hover,
-.top-bar__menu-btn:hover,
-.header-hamburger:hover {
-  background: rgba(242, 183, 5, 0.2) !important;
-  border-color: #F2B705 !important;
-  color: #F2B705 !important;
 }
