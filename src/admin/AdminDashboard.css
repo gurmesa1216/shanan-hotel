@@ -279,3 +279,39 @@
   text-align: center;
   color: #ffffff;
 }
+
+/* ── Top Header Menu Toggle Icon Override ── */
+.menu-toggle,
+.top-bar__menu-btn,
+button[aria-label="Toggle menu"],
+.header-hamburger {
+  background: rgba(255, 255, 255, 0.08) !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  border-radius: 10px !important;
+  color: #FFFFFF !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 8px !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+}
+
+/* Brighten inner lines/SVG if applicable */
+.menu-toggle stroke,
+.top-bar__menu-btn stroke,
+.header-hamburger stroke,
+.menu-toggle svg,
+.top-bar__menu-btn svg {
+  stroke: #FFFFFF !important;
+  color: #FFFFFF !important;
+}
+
+/* Gold Accent Hover State */
+.menu-toggle:hover,
+.top-bar__menu-btn:hover,
+.header-hamburger:hover {
+  background: rgba(242, 183, 5, 0.2) !important;
+  border-color: #F2B705 !important;
+  color: #F2B705 !important;
+}
