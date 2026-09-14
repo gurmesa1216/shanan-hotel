@@ -78,7 +78,7 @@ export default function AdminLayout({
             <CrownIcon />
           </div>
           <div>
-            <h2 className="admin-sidebar__title">Habesha Bites</h2>
+            <h2 className="admin-sidebar__title">Shanan Hotel And Resorts</h2>
             <p className="admin-sidebar__subtitle">Admin Panel</p>
           </div>
         </div>
