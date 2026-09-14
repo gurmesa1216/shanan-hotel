@@ -275,7 +275,14 @@ export default function App() {
                 navigate('/')
               }}
             >
-              {adminPage === 'dashboard' && <AdminDashboard />}
+              {adminPage === 'dashboard' && (
+                <AdminDashboard
+                  onNavigate={(page) => {
+                    const targetPage = page === 'admin-menu' ? 'menu' : page
+                    setAdminPage(targetPage)
+                  }}
+                />
+              )}
               {adminPage === "menu" && (
                 <MenuManager refreshDishes={loadDishes} categories={categories} />
               )}
