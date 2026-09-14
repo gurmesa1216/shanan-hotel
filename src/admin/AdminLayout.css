@@ -45,29 +45,28 @@ body {
 }
 
 .admin-sidebar__logo {
-  width: 48px;
-  height: 48px;
+  width: 44px;
+  height: 44px;
   border-radius: 12px;
-  background: linear-gradient(135deg, #e50914 0%, #b20710 100%);
-  color: #fff;
+  background: linear-gradient(135deg, #f2b705 0%, #d49b00 100%);
+  color: #121212;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 24px;
   flex-shrink: 0;
-  box-shadow: 0 4px 12px rgba(229, 9, 20, 0.4);
+  box-shadow: 0 4px 12px rgba(242, 183, 5, 0.3);
 }
 
 .admin-sidebar__title {
   margin: 0;
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 700;
   color: #fff;
 }
 
 .admin-sidebar__subtitle {
-  margin-top: 2px;
-  font-size: 13px;
+  margin: 2px 0 0 0;
+  font-size: 12px;
   color: #a0a0a0;
 }
 
@@ -83,8 +82,8 @@ body {
 .admin-nav-item {
   display: flex;
   align-items: center;
-  gap: 16px;
-  padding: 14px 18px;
+  gap: 14px;
+  padding: 12px 16px;
   border-radius: 12px;
   font-size: 15px;
   font-weight: 500;
@@ -94,6 +93,13 @@ body {
   border: none;
   background: transparent;
   cursor: pointer;
+  text-align: left;
+}
+
+.admin-nav-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .admin-nav-item:hover {
@@ -102,10 +108,10 @@ body {
 }
 
 .admin-nav-item--active {
-  background: rgba(229, 9, 20, 0.15);
-  color: #e50914;
+  background: rgba(242, 183, 5, 0.15);
+  color: #f2b705;
   font-weight: 600;
-  border-left: 4px solid #e50914;
+  border-left: 4px solid #f2b705;
 }
 
 .admin-sidebar__footer {
@@ -119,7 +125,7 @@ body {
 .admin-sidebar__conn {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
   font-size: 13px;
   color: #a0a0a0;
 }
@@ -129,28 +135,35 @@ body {
   height: 8px;
   border-radius: 50%;
   background: #c4432b;
+  flex-shrink: 0;
 }
 
 .admin-conn-dot--on {
   background: #2ecc71;
+  box-shadow: 0 0 8px rgba(46, 204, 113, 0.5);
 }
 
 .admin-sidebar__exit {
   width: 100%;
   height: 44px;
-  border: none;
+  border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 12px;
-  background: #eea0a0;
-  color: #121212;
+  background: rgba(255, 255, 255, 0.06);
+  color: #ffffff;
   font-size: 14px;
-  font-weight: 700;
+  font-weight: 600;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
   transition: all 0.2s ease;
 }
 
 .admin-sidebar__exit:hover {
-  background: #e58888;
-  transform: translateY(-1px);
+  background: rgba(229, 9, 20, 0.2);
+  border-color: #e50914;
+  color: #e50914;
 }
 
 /* ── Main ── */
@@ -182,18 +195,27 @@ body {
   font-weight: 700;
 }
 
+/* ── High-Contrast SVG Mobile Hamburger Icon Button ── */
 .admin-mobile-menu {
   display: none;
   width: 42px;
   height: 42px;
-  border: 1px solid #333;
+  border: 1px solid #f2b705;
   border-radius: 10px;
-  background: #222;
-  color: #fff;
-  font-size: 18px;
+  background: rgba(242, 183, 5, 0.15);
+  color: #f2b705;
   cursor: pointer;
   align-items: center;
   justify-content: center;
+  transition: all 0.2s ease;
+  padding: 0;
+}
+
+.admin-mobile-menu:hover,
+.admin-mobile-menu:active {
+  background: #f2b705;
+  color: #121212;
+  box-shadow: 0 0 12px rgba(242, 183, 5, 0.4);
 }
 
 .admin-main__content {
@@ -203,7 +225,7 @@ body {
 }
 
 .admin-sidebar-overlay {
-  display: none;
+  display: block;
   position: fixed;
   inset: 0;
   background: rgba(0, 0, 0, 0.7);
@@ -218,9 +240,6 @@ body {
   }
   .admin-sidebar--open {
     transform: translateX(0);
-  }
-  .admin-sidebar-overlay {
-    display: block;
   }
   .admin-main {
     margin-left: 0;
