@@ -39,7 +39,9 @@ export default function HomeScreen({
   const customCategories = [
     { id: 'VIP Food menu', key: 'vipFoodMenu', icon: <CrownIcon /> },
     { id: 'Food menu', key: 'foodMenu' },
+    { id: 'VIP Beverage', key: 'vipBeverage', icon: <CrownIcon /> },
     { id: 'beverage', key: 'beverage' }
+    
   ]
 
   // Default selection set to 'VIP Food menu'
@@ -160,7 +162,7 @@ export default function HomeScreen({
           </div>
           <div className="chips-scroll">
             {customCategories.map((cat) => {
-              const isVip = cat.id === 'VIP Food menu';
+              const isVip = cat.id.toLowerCase().includes('vip');
               const isActive = activeCategory === cat.id;
               
               return (
@@ -170,7 +172,7 @@ export default function HomeScreen({
                   onClick={() => setActiveCategory(cat.id)}
                 >
                   {cat.icon && <span className="chip__icon">{cat.icon}</span>}
-                  <span className="chip__label">{t(cat.key)}</span>
+                  <span className="chip__label">{t(cat.key) || cat.id}</span>
                 </button>
               );
             })}
