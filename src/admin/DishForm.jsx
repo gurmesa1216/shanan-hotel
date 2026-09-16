@@ -68,6 +68,58 @@ export default function DishForm({
     }
   };
 
+  // Compress local image file before sending or setting state
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      const img = new Image();
+      img.src = event.target.result;
+
+      img.onload = () => {
+        const canvas = document.createElement("canvas");
+        const MAX_WIDTH = 600;
+        const MAX_HEIGHT = 600;
+
+        let width = img.width;
+        let height = img.height;
+
+        if (width > height) {
+          if (width > MAX_WIDTH) {
+            height *= MAX_WIDTH / width;
+            width = MAX_WIDTH;
+          }
+        } else {
+          if (height > MAX_HEIGHT) {
+            width *= MAX_HEIGHT / height;
+            height = MAX_HEIGHT;
+          }
+        }
+
+        canvas.width = width;
+        canvas.height = height;
+
+        const ctx = canvas.getContext("2d");
+        ctx.drawImage(img, 0, 0, width, height);
+
+        // Convert canvas image to compressed Base64 blob/string
+        canvas.toBlob((blob) => {
+          if (blob) {
+            const compressedFile = new File([blob], file.name, {
+              type: "image/jpeg",
+              lastModified: Date.now()
+            });
+            setImage(compressedFile);
+            setPreview(URL.createObjectURL(compressedFile));
+          }
+        }, "image/jpeg", 0.5);
+      };
+    };
+    reader.readAsDataURL(file);
+  };
+
   const saveDish = async (e) => {
     e.preventDefault();
 
@@ -124,9 +176,10 @@ export default function DishForm({
             <option value="VIP Food menu">VIP Food menu</option>
             <option value="Food menu">Food menu</option>
             <option value="beverage">beverage</option>
+            <option value="VIP Beverage">VIP Beverage</option>
           </select>
 
-          <label>Image URL</label>
+          <label>Image URL / Upload</label>
           <div className="image-upload-box">
             {preview && (
               <img src={preview} alt="preview" className="image-preview" />
@@ -138,13 +191,7 @@ export default function DishForm({
                 id="dish-image-file-input"
                 type="file"
                 accept="image/*"
-                onChange={(e) => {
-                  const file = e.target.files[0];
-                  if (file) {
-                    setImage(file);
-                    setPreview(URL.createObjectURL(file));
-                  }
-                }}
+                onChange={handleFileChange}
               />
             </label>
           </div>
