@@ -38,8 +38,9 @@ export default function MenuScreen({
     { id: 'All', key: 'all', label: 'All' },
     { id: 'VIP Food menu', key: 'vipFoodMenu', label: 'VIP Food menu', icon: <CrownIcon /> },
     { id: 'Food menu', key: 'foodMenu', label: 'Food menu' },
-    { id: 'beverage', key: 'beverage', label: 'Beverage' },
-    { id: 'VIP Beverage', key: 'vipBeverage', label: 'VIP Beverage', icon: <CrownIcon /> }
+    { id: 'VIP Beverage', key: 'vipBeverage', label: 'VIP Beverage', icon: <CrownIcon /> },
+    { id: 'beverage', key: 'beverage', label: 'Beverage' }
+    
   ];
 
   const [activeCategory, setActiveCategory] = useState("All");
