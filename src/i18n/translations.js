@@ -73,6 +73,7 @@ const translations = {
     vipFoodMenu: "VIP Food menu",
     foodMenu: "Food menu",
     beverage: "Beverage",
+    vipBeverage: "VIP Beverage",
   },
 
   // =========================
@@ -149,6 +150,7 @@ const translations = {
     vipFoodMenu: "የቪ.አይ.ፒ ምግቦች",
     foodMenu: "የምግብ ዝርዝር",
     beverage: "መጠጦች",
+    vipBeverage: "የቪ.አይ.ፒ መጠጦች",
   },
 
   // =========================
@@ -227,6 +229,7 @@ const translations = {
     vipFoodMenu: "Nyaata VIP",
     foodMenu: "Tarree Nyaataa",
     beverage: "Dhugaatii",
+    vipBeverage: "Dhugaatii VIP",
   },
 };
 
