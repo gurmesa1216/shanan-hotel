@@ -8,7 +8,7 @@ import DishCard from "../components/DishCard";
 import BottomNav from "../components/BottomNav";
 
 import logoImg from "../assets/a.jpg";
-import heroBgImg from "../assets/hero-bg.jpg"; // Imported hero background image
+import heroBgImg from "../assets/hero-bg.jpg";
 
 // VIP Crown SVG Component
 const CrownIcon = () => (
@@ -38,7 +38,8 @@ export default function MenuScreen({
     { id: 'All', key: 'all', label: 'All' },
     { id: 'VIP Food menu', key: 'vipFoodMenu', label: 'VIP Food menu', icon: <CrownIcon /> },
     { id: 'Food menu', key: 'foodMenu', label: 'Food menu' },
-    { id: 'beverage', key: 'beverage', label: 'Beverage' }
+    { id: 'beverage', key: 'beverage', label: 'Beverage' },
+    { id: 'VIP Beverage', key: 'vipBeverage', label: 'VIP Beverage', icon: <CrownIcon /> }
   ];
 
   const [activeCategory, setActiveCategory] = useState("All");
@@ -173,7 +174,7 @@ export default function MenuScreen({
 
           <div className="chips-scroll">
             {customCategories.map((cat) => {
-              const isVip = cat.id === 'VIP Food menu';
+              const isVip = cat.id.toLowerCase().includes('vip');
               const isActive = activeCategory === cat.id;
 
               return (

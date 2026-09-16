@@ -411,3 +411,32 @@
   box-shadow: 0 6px 16px rgba(242, 183, 5, 0.35);
   font-weight: 700;
 }
+
+/* ── VIP Category Chip Styles ── */
+.chip--vip,
+.chip[class*="chip--vip"] {
+  border: 1px solid rgba(242, 183, 5, 0.4);
+  background: rgba(242, 183, 5, 0.08);
+  color: #B8860B;
+}
+
+.chip--vip .chip__icon,
+.chip[class*="chip--vip"] .chip__icon {
+  display: inline-flex;
+  align-items: center;
+  color: #D49B00;
+}
+
+.chip--vip.chip--active,
+.chip[class*="chip--vip"].chip--active {
+  background: linear-gradient(135deg, #F2B705 0%, #D49B00 100%);
+  color: #121212;
+  border-color: #F2B705;
+  box-shadow: 0 6px 16px rgba(242, 183, 5, 0.35);
+  font-weight: 700;
+}
+
+.chip--vip.chip--active .chip__icon,
+.chip[class*="chip--vip"].chip--active .chip__icon {
+  color: #121212;
+}
