@@ -78,6 +78,16 @@ export const api = {
       body: data instanceof FormData ? data : JSON.stringify(data),
     }),
 
+  // Upload local image file via Multipart FormData to Cloudinary
+  uploadDishImage: (id, file) => {
+    const formData = new FormData();
+    formData.append("image", file);
+    return request(`/dishes/${id}/image`, {
+      method: "POST",
+      body: formData,
+    });
+  },
+
   toggleAvailability: (id, available) =>
     request(`/dishes/${id}/availability`, {
       method: "PATCH",

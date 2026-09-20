@@ -122,28 +122,16 @@ export default function MenuManager({ refreshDishes, categories = [] }) {
     setUploadingDishId(dishId);
 
     try {
-      const formData = new FormData();
-      formData.append("image", file);
-
-      // Bakka API backend keessani sirriitti adda baasaa
-      const API_BASE = process.env.VITE_API_URL || process.env.REACT_APP_API_URL || "https://shanan-hotel-backend.onrender.com";
-
-      const response = await fetch(`${API_BASE}/api/dishes/${dishId}/image`, {
-        method: "POST",
-        body: formData,
-      });
-
-      const data = await response.json();
-
-      if (response.ok) {
+      const res = await api.uploadDishImage(dishId, file);
+      if (res) {
         await loadMenu();
         if (refreshDishes) refreshDishes();
       } else {
-        alert("Image upload failed: " + (data.error || "Server error"));
+        alert("Failed to upload image.");
       }
     } catch (err) {
       console.error("File upload error:", err);
-      alert("Failed to upload local image file: " + err.message);
+      alert("Failed to upload local image file");
     } finally {
       setUploadingDishId(null);
       e.target.value = "";
