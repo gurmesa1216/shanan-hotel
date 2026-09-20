@@ -3,7 +3,6 @@ import { api } from "../api/client.js";
 import DishForm from "./DishForm.jsx";
 import "./MenuManager.css";
 
-// SVG Icons
 const PlusIcon = () => (
   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
     <line x1="12" y1="5" x2="12" y2="19" />
@@ -68,14 +67,12 @@ export default function MenuManager({ refreshDishes, categories = [] }) {
     loadMenu();
   }, []);
 
-  // TOGGLE VISIBILITY
   const toggleFood = async (dish) => {
     await api.toggleAvailability(dish.id, !dish.available);
     loadMenu();
     if (refreshDishes) refreshDishes();
   };
 
-  // CHANGE PRICE
   const changePrice = async (dish) => {
     const newPrice = prompt("Enter new price (ETB):", dish.price);
     if (!newPrice) return;
@@ -85,7 +82,6 @@ export default function MenuManager({ refreshDishes, categories = [] }) {
     if (refreshDishes) refreshDishes();
   };
 
-  // DELETE DISH
   const handleDelete = async (id) => {
     const confirmDelete = window.confirm("Are you sure you want to delete this food?");
     if (!confirmDelete) return;
@@ -100,7 +96,6 @@ export default function MenuManager({ refreshDishes, categories = [] }) {
     }
   };
 
-  // OPEN IMAGE SELECTOR
   const triggerImageChange = (dish) => {
     setSelectedDishForImage(dish);
     const choice = window.confirm(
@@ -119,7 +114,6 @@ export default function MenuManager({ refreshDishes, categories = [] }) {
     }
   };
 
-  // MULTIPART FILE UPLOAD (FOR LOCAL STORAGE FILES)
   const handleFileChange = async (e) => {
     const file = e.target.files[0];
     if (!file || !selectedDishForImage) return;
@@ -131,10 +125,10 @@ export default function MenuManager({ refreshDishes, categories = [] }) {
       const formData = new FormData();
       formData.append("image", file);
 
-      // Get backend API base URL from client or fallback
-      const API_BASE_URL = process.env.REACT_APP_API_URL || "https://shanan-hotel-backend.onrender.com";
+      // Bakka API backend keessani sirriitti adda baasaa
+      const API_BASE = process.env.VITE_API_URL || process.env.REACT_APP_API_URL || "https://shanan-hotel-backend.onrender.com";
 
-      const response = await fetch(`${API_BASE_URL}/api/dishes/${dishId}/image`, {
+      const response = await fetch(`${API_BASE}/api/dishes/${dishId}/image`, {
         method: "POST",
         body: formData,
       });
@@ -145,18 +139,17 @@ export default function MenuManager({ refreshDishes, categories = [] }) {
         await loadMenu();
         if (refreshDishes) refreshDishes();
       } else {
-        alert("Image upload failed: " + (data.error || "Unknown error"));
+        alert("Image upload failed: " + (data.error || "Server error"));
       }
     } catch (err) {
       console.error("File upload error:", err);
-      alert("Failed to upload local image file");
+      alert("Failed to upload local image file: " + err.message);
     } finally {
       setUploadingDishId(null);
       e.target.value = "";
     }
   };
 
-  // URL UPDATE FALLBACK
   const updateDishImageUrl = async (dishId, imageUrl) => {
     await api.updateDish(dishId, { image_url: imageUrl });
     loadMenu();
@@ -169,7 +162,6 @@ export default function MenuManager({ refreshDishes, categories = [] }) {
 
   return (
     <div className="menu-manager">
-      {/* Hidden File Input */}
       <input
         type="file"
         ref={fileInputRef}
