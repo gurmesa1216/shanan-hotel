@@ -33,7 +33,10 @@ const upload = multer({
 
 const app = express();
 app.use(cors());
-app.use(express.json());
+
+// INCREASE JSON & URLENCODED PAYLOAD LIMIT FOR BASE64 IMAGES
+app.use(express.json({ limit: '10mb' }));
+app.use(express.urlencoded({ limit: '10mb', extended: true }));
 
 // ── Helper: Extract detailed error message for responses & logs ──
 function getErrorMessage(err) {
@@ -47,7 +50,6 @@ function mapDish(row, req) {
     ? req.get('x-forwarded-proto') 
     : (req ? req.protocol : 'https');
 
-  // Uses Render's dynamic hostname if req is missing, avoiding hardcoded cross-client URLs
   const defaultHost = process.env.RENDER_EXTERNAL_HOSTNAME || 'shanan-hotel-backend.onrender.com';
   const host = req ? req.get('host') : defaultHost;
   const baseUrl = `${protocol}://${host}`;
@@ -56,14 +58,13 @@ function mapDish(row, req) {
   if (row.image_url) {
     if (row.image_url.startsWith('http://')) {
       imageUrl = row.image_url.replace('http://', 'https://');
-    } else if (row.image_url.startsWith('https://')) {
+    } else if (row.image_url.startsWith('https://') || row.image_url.startsWith('data:image')) {
       imageUrl = row.image_url;
     } else {
       imageUrl = `${baseUrl}${encodeURI(row.image_url)}`;
     }
   }
 
-  // Gracefully handles both string category IDs and foreign key names
   const categoryDisplayName = row.category_name || row.category_id || 'Food menu';
 
   return {
@@ -95,10 +96,8 @@ app.get('/api', (req, res) => {
   res.json({ message: "Shanan Hotel API v1 is active", status: "OK" });
 });
 
-// Health check endpoint for UptimeRobot
 app.get('/api/health', async (req, res) => {
   try {
-    // Ping MySQL connection to verify DB health
     await pool.query('SELECT 1');
     res.status(200).json({ status: "ok", message: "Server and database are healthy!" });
   } catch (err) {
@@ -110,7 +109,6 @@ app.get('/api/health', async (req, res) => {
 // ════════ CATEGORIES ════════
 
 app.get('/api/categories', (req, res) => {
-  // Directly returns target category structure to align frontend tabs
   res.json([
     { id: 1, name: "All", icon: "🍽️" },
     { id: 2, name: "VIP Food menu", icon: "👑" },
@@ -138,7 +136,6 @@ app.get('/api/dishes', async (req, res) => {
       sql += ' AND d.available = TRUE';
     }
     if (category && category !== 'all') {
-      // Supports querying by both FK joined category name and direct category_id string
       sql += ' AND (c.name = ? OR d.category_id = ?)';
       params.push(category, category);
     }
@@ -217,6 +214,30 @@ app.post("/api/dishes", (req, res) => {
   });
 });
 
+// Dedicated Multipart Route for Updating Dish Image via Multer & Cloudinary
+app.post("/api/dishes/:id/image", (req, res) => {
+  upload.single("image")(req, res, async (err) => {
+    if (err) {
+      console.error("Cloudinary Upload Error:", err);
+      return res.status(500).json({ error: "Image upload failed: " + getErrorMessage(err) });
+    }
+
+    try {
+      if (!req.file) {
+        return res.status(400).json({ error: "No image file provided" });
+      }
+
+      const imageUrl = req.file.path;
+      await pool.query("UPDATE dishes SET image_url = ? WHERE id = ?", [imageUrl, req.params.id]);
+
+      res.json({ message: "Image updated successfully", image_url: imageUrl });
+    } catch (dbErr) {
+      console.error("Database Error on POST /api/dishes/:id/image:", dbErr);
+      res.status(500).json({ error: getErrorMessage(dbErr) });
+    }
+  });
+});
+
 app.put('/api/dishes/:id', async (req, res) => {
   try {
     const allowed = [
@@ -225,6 +246,19 @@ app.put('/api/dishes/:id', async (req, res) => {
     ];
     const updates = [];
     const params = [];
+
+    // Base64 upload support: Upload to Cloudinary directly if image_url is Base64
+    if (req.body.image_url && req.body.image_url.startsWith('data:image')) {
+      try {
+        const uploadResponse = await cloudinary.uploader.upload(req.body.image_url, {
+          folder: "shanan_hotel_dishes"
+        });
+        req.body.image_url = uploadResponse.secure_url;
+      } catch (uploadErr) {
+        console.error("Cloudinary Base64 Upload Error:", uploadErr);
+      }
+    }
+
     for (const key of allowed) {
       if (req.body[key] !== undefined) {
         updates.push(`${key} = ?`);
