@@ -1,20 +1,13 @@
 const LIVE_BACKEND_URL = "https://shanan-hotel-backend.onrender.com";
 
-// Get raw env variable or fallback
 const rawUrl = import.meta.env.VITE_API_URL || LIVE_BACKEND_URL;
-
-// Clean stray brackets/quotes, strip trailing slashes, and format /api path safely
 const cleanUrl = String(rawUrl).replace(/[\[\]'"]/g, '').replace(/\/$/, '');
 const BASE_URL = cleanUrl.endsWith('/api') ? cleanUrl : `${cleanUrl}/api`;
 
-// ===============================
-// API REQUEST HELPER
-// ===============================
-
+// Safe Request Helper to handle Non-JSON responses gracefully
 async function request(path, options = {}) {
   const headers = { ...(options.headers || {}) };
 
-  // Only send JSON header if body is NOT FormData
   if (!(options.body instanceof FormData)) {
     headers["Content-Type"] = "application/json";
   }
@@ -25,7 +18,15 @@ async function request(path, options = {}) {
       headers,
     });
 
-    const data = await res.json();
+    const contentType = res.headers.get("content-type");
+    let data = {};
+
+    if (contentType && contentType.includes("application/json")) {
+      data = await res.json();
+    } else {
+      const text = await res.text();
+      data = { error: text || `HTTP ${res.status}` };
+    }
 
     if (!res.ok) {
       throw new Error(data.error || `HTTP ${res.status}`);
@@ -33,59 +34,72 @@ async function request(path, options = {}) {
 
     return data;
   } catch (err) {
-    console.error("API Error:", err.message);
-    return null;
+    console.error("API Request Error:", err.message);
+    return { error: err.message };
   }
 }
 
-// ===============================
-// API FUNCTIONS
-// ===============================
+// Convert File to Base64 String Helper
+const fileToBase64 = (file) => new Promise((resolve, reject) => {
+  const reader = new FileReader();
+  reader.readAsDataURL(file);
+  reader.onload = () => resolve(reader.result);
+  reader.onerror = (error) => reject(error);
+});
 
 export const api = {
-  // =========================
-  // ADMIN LOGIN
-  // =========================
+  // ADMIN AUTH
   adminLogin: (data) =>
     request("/admin/login", {
       method: "POST",
       body: JSON.stringify(data),
     }),
 
-  // =========================
   // DASHBOARD
-  // =========================
   getStats: () => request("/stats"),
 
-  // =========================
-  // DISHES / MENU
-  // =========================
+  // DISHES
   getDishes: (all = false) => request(`/dishes${all ? "?all=true" : ""}`),
 
   getDish: (id) => request(`/dishes/${id}`),
 
-  // Supports FormData for image upload
   addDish: (data) =>
     request("/dishes", {
       method: "POST",
       body: data,
     }),
 
-  // Handles both JSON objects and FormData updates
   updateDish: (id, data) =>
     request(`/dishes/${id}`, {
       method: "PUT",
       body: data instanceof FormData ? data : JSON.stringify(data),
     }),
 
-  // Upload local image file via Multipart FormData to Cloudinary
-  uploadDishImage: (id, file) => {
-    const formData = new FormData();
-    formData.append("image", file);
-    return request(`/dishes/${id}/image`, {
-      method: "POST",
-      body: formData,
-    });
+  // Dual-strategy Upload: Tries FormData POST route first, falls back to Base64 PUT route
+  uploadDishImage: async (id, file) => {
+    try {
+      const formData = new FormData();
+      formData.append("image", file);
+
+      const res = await request(`/dishes/${id}/image`, {
+        method: "POST",
+        body: formData,
+      });
+
+      if (res && !res.error) {
+        return res;
+      }
+
+      console.warn("Multipart endpoint unavailable. Retrying via Base64 upload...");
+      const base64 = await fileToBase64(file);
+      return await request(`/dishes/${id}`, {
+        method: "PUT",
+        body: JSON.stringify({ image_url: base64 }),
+      });
+    } catch (err) {
+      console.error("Image upload failed completely:", err);
+      return { error: err.message };
+    }
   },
 
   toggleAvailability: (id, available) =>
@@ -99,31 +113,10 @@ export const api = {
       method: "DELETE",
     }),
 
-  // =========================
   // CATEGORIES
-  // =========================
   getCategories: () => request("/categories"),
 
-  addCategory: (data) =>
-    request("/categories", {
-      method: "POST",
-      body: JSON.stringify(data),
-    }),
-
-  updateCategory: (id, data) =>
-    request(`/categories/${id}`, {
-      method: "PUT",
-      body: JSON.stringify(data),
-    }),
-
-  deleteCategory: (id) =>
-    request(`/categories/${id}`, {
-      method: "DELETE",
-    }),
-
-  // =========================
   // ORDERS
-  // =========================
   getOrders: () => request("/orders"),
 
   createOrder: (data) =>
